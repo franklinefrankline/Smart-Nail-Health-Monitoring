@@ -13,7 +13,7 @@ from datetime import datetime
 import db_client
 import security
 
-PORT = 8000
+PORT = int(os.environ.get("PORT", "8000"))
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
