@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="admin.html" style="color: inherit;"><i class="fa-solid fa-heart-pulse"></i> Admin Panel</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="admin.html" class="active">Overview</a>
+            <a href="admin-users.html">Users</a>
+            <a href="admin-reports.html">Reports</a>
+            <a href="#" onclick="logout(); return false;">Logout</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="mb-2">Admin Dashboard</h1>
+        <p class="text-secondary mb-3">System statistics and overview.</p>
+
+        <div class="dashboard-grid">
+            <div class="card stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="stat-info">
+                    <h3>Total Users</h3>
+                    <p class="stat-value" id="totalUsers">-</p>
+                </div>
+            </div>
+            <div class="card stat-card">
+                <div class="stat-icon"><i class="fa-solid fa-file-medical"></i></div>
+                <div class="stat-info">
+                    <h3>Total Analyses</h3>
+                    <p class="stat-value" id="totalAnalyses">-</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Smart Nail Health Monitoring System.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const token = localStorage.getItem("access_token");
+            if (!token) {
+                window.location.href = "login.html";
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/admin/stats`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (response.status === 403) {
+                    showToast("Admin access required", "error");
+                    setTimeout(() => window.location.href = "dashboard.html", 2000);
+                    return;
+                }
+                const result = await response.json();
+                if (result.success) {
+                    document.getElementById("totalUsers").innerText = result.data.users;
+                    document.getElementById("totalAnalyses").innerText = result.data.reports;
+                }
+            } catch (err) {
+                showToast("Network error", "error");
+            }
+        });
+    </script>
+</body>
+</html>

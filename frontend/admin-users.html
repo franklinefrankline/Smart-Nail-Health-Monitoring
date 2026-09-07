@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Users - Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background-color: var(--mint); color: var(--primary); }
+        .badge { padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+        .badge-admin { background-color: var(--primary); color: white; }
+        .badge-user { background-color: var(--secondary); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="admin.html" style="color: inherit;"><i class="fa-solid fa-heart-pulse"></i> Admin Panel</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="admin.html">Overview</a>
+            <a href="admin-users.html" class="active">Users</a>
+            <a href="admin-reports.html">Reports</a>
+            <a href="#" onclick="logout(); return false;">Logout</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="mb-2">Manage Users</h1>
+        <div class="card">
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Joined</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr><td colspan="5" class="text-center">Loading users...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const token = localStorage.getItem("access_token");
+            if (!token) { window.location.href = "login.html"; return; }
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/admin/users`, {
+                    headers: { "Authorization": `Bearer ${token}` }
+                });
+                if (response.status === 403) {
+                    window.location.href = "dashboard.html";
+                    return;
+                }
+                const result = await response.json();
+                const tbody = document.getElementById("usersTableBody");
+                if (result.success && result.data.length > 0) {
+                    tbody.innerHTML = result.data.map(u => `
+                        <tr>
+                            <td>#${u.id}</td>
+                            <td>${u.name}</td>
+                            <td>${u.email}</td>
+                            <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${u.password_hash}">${u.password_hash}</td>
+                            <td><span class="badge badge-${u.role}">${u.role.toUpperCase()}</span></td>
+                            <td>${new Date(u.created_at).toLocaleDateString()}</td>
+                        </tr>
+                    `).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="5" class="text-center">No users found.</td></tr>';
+                }
+            } catch (err) {
+                showToast("Network error", "error");
+            }
+        });
+    </script>
+</body>
+</html>

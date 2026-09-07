@@ -1,0 +1,39 @@
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 160px);
+  padding: 2rem 5%;
+}
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 2.5rem;
+}
+.auth-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--primary);
+}
+.password-strength {
+  height: 4px;
+  background-color: var(--border-color);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.password-strength-bar {
+  height: 100%;
+  width: 0;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+.password-strength-bar.weak { width: 33%; background-color: var(--danger); }
+.password-strength-bar.medium { width: 66%; background-color: var(--warning); }
+.password-strength-bar.strong { width: 100%; background-color: var(--success); }
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+}

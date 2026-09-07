@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Nail Image - Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/upload.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" style="color: inherit;"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="upload.html" class="active btn btn-primary">Upload</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="upload-container">
+            <h2>Upload Nail Image</h2>
+            <p style="color: var(--text-secondary);">Take a clear, well-lit photo of your nail for analysis.</p>
+
+            <div class="card upload-area" id="dropZone">
+                
+                <div id="uploadPrompt">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <h3>Drag & Drop</h3>
+                    <p class="mb-2">OR</p>
+                    
+                    <div class="upload-actions">
+                        <label class="btn btn-primary">
+                            <i class="fa-solid fa-camera"></i> Take Photo
+                            <input type="file" id="cameraInput" class="file-input" accept="image/jpeg,image/png" capture="environment">
+                        </label>
+                        <label class="btn btn-secondary">
+                            <i class="fa-regular fa-image"></i> Gallery
+                            <input type="file" id="galleryInput" class="file-input" accept="image/jpeg,image/png">
+                        </label>
+                    </div>
+                    
+                    <p class="mt-2" style="font-size: 0.85rem; color: var(--text-secondary);">
+                        Supported: JPG / JPEG / PNG<br>Maximum: 5 MB
+                    </p>
+                </div>
+
+                <div class="preview-container" id="previewContainer">
+                    <img id="imagePreview" class="preview-image" src="" alt="Nail Preview">
+                    <div id="fileInfo" class="mb-2" style="font-size: 0.9rem; font-weight: 500;"></div>
+                    <div class="upload-actions">
+                        <button id="removeBtn" class="btn btn-secondary"><i class="fa-solid fa-trash"></i> Remove</button>
+                        <button id="analyzeBtn" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Image</button>
+                    </div>
+                </div>
+
+                <div class="loading-overlay" id="loadingOverlay">
+                    <i class="fa-solid fa-circle-notch fa-spin spinner"></i>
+                    <h3 id="loadingText">Processing image...</h3>
+                    <p style="color: var(--text-secondary);">Extracting features & calculating score</p>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/upload.js"></script>
+</body>
+</html>

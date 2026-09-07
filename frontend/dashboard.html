@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-page">
+    <button class="dashboard-menu-toggle" id="dashboardMenuToggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="brand-lockup">
+                <a href="dashboard.html" class="brand-mark" aria-label="Smart Nail dashboard">
+                    <span class="brand-icon" aria-hidden="true">SN</span>
+                    <span><strong>Smart Nail</strong><small>Health Monitoring</small></span>
+                </a>
+            </div>
+            <div class="profile-block">
+                <div class="avatar" id="sidebarAvatar">U</div>
+                <div class="profile-copy"><strong id="sidebarName">User</strong><span id="sidebarEmail">Loading...</span></div>
+            </div>
+            <nav class="dashboard-nav" aria-label="User navigation">
+                <span class="nav-section-label">Workspace</span>
+                <a class="dashboard-nav-link active" href="dashboard.html"><span class="nav-icon">⌂</span>Dashboard</a>
+                <a class="dashboard-nav-link" href="upload.html"><span class="nav-icon">＋</span>Analyze Nail</a>
+                <a class="dashboard-nav-link" href="records.html"><span class="nav-icon">▤</span>My Reports</a>
+                <a class="dashboard-nav-link" href="history.html"><span class="nav-icon">◷</span>History</a>
+                <span class="nav-section-label">Account</span>
+                <a class="dashboard-nav-link" href="profile.html"><span class="nav-icon">◎</span>Profile</a>
+                <a class="dashboard-nav-link" href="settings.html"><span class="nav-icon">⚙</span>Settings</a>
+            </nav>
+            <button class="sidebar-logout" type="button" id="logoutButton"><span class="nav-icon">↪</span>Logout</button>
+        </aside>
+
+        <main class="dashboard-main">
+            <header class="dashboard-topbar">
+                <div><p class="eyebrow">Personal overview</p><h1>Dashboard</h1><p class="welcome-line">Welcome back, <strong id="welcomeName">User</strong></p></div>
+                <div class="topbar-user"><div class="avatar avatar-small" id="headerAvatar">U</div><span id="headerName">User</span><a href="settings.html" class="settings-link" aria-label="Open settings">⚙</a></div>
+            </header>
+
+            <section class="summary-grid" aria-label="Analysis summary">
+                <article class="summary-card card-accent-teal"><div class="summary-icon">▥</div><div><p>Total Analyses</p><strong id="totalReports">0</strong><small>All completed reports</small></div></article>
+                <article class="summary-card card-accent-blue"><div class="summary-icon">↗</div><div><p>Latest Health Score</p><strong id="latestScoreValue">--<em>/100</em></strong><small id="scoreHint">No analysis available yet</small></div></article>
+                <article class="summary-card card-accent-amber"><div class="summary-icon">◇</div><div><p>Current Risk Level</p><strong id="latestRiskLevel">No analysis</strong><small>Based on latest report</small></div></article>
+                <article class="summary-card card-accent-violet"><div class="summary-icon">◷</div><div><p>Last Analysis</p><strong id="lastAnalysis">--</strong><small id="lastAnalysisTime">No analysis available yet</small></div></article>
+            </section>
+
+            <section class="dashboard-grid dashboard-grid-main">
+                <article class="dashboard-card overview-card">
+                    <div class="card-heading"><div><p class="eyebrow">Personal trend</p><h2>Health Analysis Overview</h2></div><a class="text-action" href="upload.html">Analyze Nail <span>↗</span></a></div>
+                    <div class="chart-key"><span><i></i>Health score</span><span class="chart-range">Last analyses</span></div>
+                    <div class="health-chart" id="healthChart"><div class="empty-state">Loading analysis history...</div></div>
+                </article>
+                <article class="dashboard-card risk-card">
+                    <div class="card-heading"><div><p class="eyebrow">Distribution</p><h2>Risk Summary</h2></div></div>
+                    <div class="donut-wrap"><div class="risk-donut" id="riskDonut"><div><strong id="riskTotal">0</strong><span>reports</span></div></div></div>
+                    <div class="risk-list" id="riskList"><div class="risk-row"><span><i class="risk-dot low"></i>Low Risk</span><strong>--</strong></div><div class="risk-row"><span><i class="risk-dot moderate"></i>Moderate Risk</span><strong>--</strong></div><div class="risk-row"><span><i class="risk-dot high"></i>High Risk</span><strong>--</strong></div></div>
+                    <p class="empty-state risk-empty" id="riskEmpty">No risk data available</p>
+                </article>
+            </section>
+
+            <section class="dashboard-grid dashboard-grid-lower">
+                <article class="dashboard-card recent-card" id="recent-analysis">
+                    <div class="card-heading"><div><p class="eyebrow">Your records</p><h2>Recent Analysis</h2></div><a class="text-action" href="records.html">View All Reports <span>↗</span></a></div>
+                    <div class="recent-list" id="historyList"><div class="empty-state">Loading reports...</div></div>
+                </article>
+                <aside class="dashboard-card tips-card"><div class="card-heading"><div><p class="eyebrow">Everyday care</p><h2>General Nail Health Tips</h2></div><span class="tip-spark">✦</span></div><p class="tips-intro">General nail-care information for your routine.</p><ul><li>Keep nails clean and dry.</li><li>Keep nails trimmed and gently filed.</li><li>Avoid excessive nail biting or picking.</li><li>Do not share nail tools.</li><li>Use moisturizer around the nail area.</li></ul></aside>
+            </section>
+            <p class="dashboard-disclaimer">Image-based monitoring supports awareness and does not replace professional medical advice.</p>
+        </main>
+    </div>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" style="color: inherit;"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a>
+        </div>
+    </nav>
+
+    <main class="auth-container">
+        <div class="card auth-card">
+            <h2 class="auth-title" id="resetTitle">Reset Password</h2>
+            <p id="resetDescription" style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Enter your email to receive a password reset link.</p>
+            <form id="forgotForm">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" autocomplete="email" required>
+                </div>
+                <div id="newPasswordFields" hidden>
+                    <div class="form-group">
+                        <label class="form-label" for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" class="form-control" minlength="8" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" minlength="8" autocomplete="new-password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;" id="resetBtn">
+                    Send Reset Link
+                </button>
+            </form>
+            <div class="text-center mt-2">
+                <a href="login.html" style="font-weight: 600;"><i class="fa-solid fa-arrow-left"></i> Back to Login</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("forgotForm");
+            const token = new URLSearchParams(window.location.search).get("token");
+            const email = document.getElementById("email");
+            const passwordFields = document.getElementById("newPasswordFields");
+            const button = document.getElementById("resetBtn");
+
+            if (token) {
+                document.getElementById("resetTitle").textContent = "Choose a New Password";
+                document.getElementById("resetDescription").textContent = "Create a new password for your Smart Nail account.";
+                passwordFields.hidden = false;
+                email.hidden = true;
+                email.required = false;
+                button.textContent = "Update Password";
+            }
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                button.disabled = true;
+                button.textContent = token ? "Updating..." : "Sending...";
+                const payload = token
+                    ? { token, password: document.getElementById("newPassword").value }
+                    : { email: email.value.trim() };
+
+                if (token && payload.password !== document.getElementById("confirmPassword").value) {
+                    showToast("Passwords do not match.", "error");
+                    button.disabled = false;
+                    button.textContent = "Update Password";
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/auth/${token ? "reset-password" : "forgot-password"}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+                    const result = await response.json();
+                    if (!response.ok || !result.success) throw new Error(result.detail || "Unable to process the request.");
+                    showToast(result.message, "success");
+                    if (token) {
+                        setTimeout(() => { window.location.href = "login.html"; }, 1000);
+                    } else {
+                        form.reset();
+                    }
+                } catch (error) {
+                    showToast(error.message || "Unable to send reset email.", "error");
+                } finally {
+                    button.disabled = false;
+                    button.textContent = token ? "Update Password" : "Send Reset Link";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

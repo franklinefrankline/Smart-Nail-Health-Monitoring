@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Smart Nail Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/records.css">
+    <style>
+        .profile-card { max-width: 720px; }
+        .profile-hero { display: flex; align-items: center; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .profile-avatar { width: 4.5rem; height: 4.5rem; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--primary); font-size: 1.7rem; font-weight: 800; }
+        .profile-hero h2 { margin: 0 0 .25rem; }
+        .profile-hero p { color: var(--text-secondary); margin: 0; }
+        .profile-fields { display: grid; gap: 1rem; padding-top: 1.5rem; }
+        .profile-field { display: grid; gap: .3rem; }
+        .profile-field span { color: var(--text-secondary); font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+        .profile-field strong { font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="dashboard.html"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a></div>
+        <button class="hamburger" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="upload.html" class="btn btn-primary">Upload</a>
+            <a href="records.html">My Reports</a>
+            <a href="profile.html" class="active"><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#" onclick="logout(); return false;">Logout</a>
+        </div>
+    </nav>
+    <main class="main-content records-page">
+        <header class="page-heading"><div><p class="eyebrow">Account</p><h1>Your Profile</h1><p>View the account currently connected to this device.</p></div></header>
+        <section class="card profile-card">
+            <div class="profile-hero"><div class="profile-avatar" id="profileAvatar">U</div><div><h2 id="profileName">User</h2><p id="profileEmail">Loading...</p></div></div>
+            <div class="profile-fields"><div class="profile-field"><span>Full name</span><strong id="profileNameValue">--</strong></div><div class="profile-field"><span>Email address</span><strong id="profileEmailValue">--</strong></div><div class="profile-field"><span>Account type</span><strong id="profileRole">User</strong></div></div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("access_token");
+            if (!token) { window.location.href = "login.html"; return; }
+            const user = JSON.parse(localStorage.getItem("user_info") || "{}");
+            const name = user.name || "User";
+            document.getElementById("profileAvatar").textContent = name.charAt(0).toUpperCase();
+            document.getElementById("profileName").textContent = name;
+            document.getElementById("profileEmail").textContent = user.email || "Signed-in user";
+            document.getElementById("profileNameValue").textContent = name;
+            document.getElementById("profileEmailValue").textContent = user.email || "--";
+            document.getElementById("profileRole").textContent = user.role === "admin" ? "Administrator" : "User";
+        });
+    </script>
+</body>
+</html>

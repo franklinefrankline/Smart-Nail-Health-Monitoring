@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Smart Nail Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/records.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="dashboard.html"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a></div>
+        <button class="hamburger" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="upload.html" class="btn btn-primary">Upload</a>
+            <a href="records.html">My Reports</a>
+            <a href="history.html" class="active">History</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#" onclick="logout(); return false;">Logout</a>
+        </div>
+    </nav>
+    <main class="main-content records-page">
+        <header class="page-heading"><div><p class="eyebrow">Timeline</p><h1>Analysis History</h1><p>Track how your image-based health scores change over time.</p></div><a class="btn btn-primary" href="upload.html"><i class="fa-solid fa-plus"></i> New analysis</a></header>
+        <section class="card records-card" aria-labelledby="historyHeading">
+            <div class="records-toolbar"><h2 id="historyHeading">Completed analyses</h2><span id="reportCount" class="record-count">Loading...</span></div>
+            <div id="recordsList" class="records-list"><div class="empty-state">Loading history...</div></div>
+        </section>
+        <p class="records-disclaimer">Image-based monitoring supports awareness and does not replace professional medical advice.</p>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/records.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+        .hero-text {
+            flex: 1;
+        }
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .hero-img-placeholder {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, var(--mint), var(--bg-color));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed var(--primary);
+            color: var(--primary);
+            font-size: 4rem;
+            box-shadow: var(--shadow);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 912px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 0;
+            }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-buttons { justify-content: center; display: flex; gap: 1rem; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fa-solid fa-heart-pulse"></i> NailHealth
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            
+            <a href="login.html" class="btn btn-secondary guest-link">Login</a>
+            <a href="signup.html" class="btn btn-primary guest-link">Sign Up</a>
+            
+            <a href="dashboard.html" class="auth-link hidden">Dashboard</a>
+            <a href="upload.html" class="btn btn-primary auth-link hidden">Upload</a>
+            <a href="#" class="auth-link hidden" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="hero-text">
+                <h1>Understand Your Nail Health Through Intelligent Image Analysis</h1>
+                <p class="mb-3" style="font-size: 1.1rem; color: var(--text-secondary);">
+                    Upload a nail image and receive a preliminary image-based health assessment, risk indicator, and personalized recommendations.
+                </p>
+                <div class="hero-buttons">
+                    <a href="upload.html" class="btn btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Your Nail</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-img-placeholder">
+                    <i class="fa-solid fa-hand-holding-medical"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="card feature-card">
+                <i class="fa-solid fa-microscope"></i>
+                <h3>Image Analysis</h3>
+                <p>Advanced feature extraction for brightness, contrast, and texture.</p>
+            </div>
+            <div class="card feature-card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>Health Score</h3>
+                <p>Deterministic scoring system mapped from 0 to 100.</p>
+            </div>
+            <div class="card feature-card">
+                <i class="fa-solid fa-shield-heart"></i>
+                <h3>Risk Monitoring</h3>
+                <p>Classifies results into low, moderate, and high risk.</p>
+            </div>
+            <div class="card feature-card">
+                <i class="fa-solid fa-droplet"></i>
+                <h3>Moisture Indicator</h3>
+                <p>Image-based assessment of visual moisture levels.</p>
+            </div>
+            <div class="card feature-card">
+                <i class="fa-solid fa-list-check"></i>
+                <h3>Recommendations</h3>
+                <p>Actionable insights tailored to your specific analysis.</p>
+            </div>
+            <div class="card feature-card">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <h3>Analysis History</h3>
+                <p>Securely store and track your nail health over time.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color: var(--primary);"><i class="fa-solid fa-heart-pulse"></i> NailHealth</h4>
+                    <p style="color: var(--text-secondary);">Smart Nail Health Monitoring System</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><strong>Medical Disclaimer:</strong> Smart Nail Health Monitoring System provides preliminary image-based insights for awareness and monitoring. It is not a medical diagnostic tool. Please consult a qualified healthcare professional for diagnosis or treatment.</p>
+                <p class="mt-1">&copy; 2026 Smart Nail Health Monitoring System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

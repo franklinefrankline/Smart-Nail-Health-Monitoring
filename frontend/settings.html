@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Smart Nail Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .settings-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .settings-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .option-card {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .option-card:hover {
+            border-color: var(--primary);
+            background-color: var(--mint);
+            color: var(--primary);
+        }
+        .option-card.selected {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" style="color: inherit;"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="upload.html" class="btn btn-primary">Upload</a>
+            <a href="settings.html" class="active"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+    <main class="main-content">
+        <h2>Settings</h2>
+        <div class="card mt-2">
+            <div class="settings-section">
+                <h3>Appearance UI Style</h3>
+                <div class="settings-grid" id="uiStyleSettings">
+                    <div class="option-card" data-value="fresh">Fresh Clinical</div>
+                    <div class="option-card" data-value="glass">Glass Health</div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>Theme</h3>
+                <div class="settings-grid" id="themeSettings">
+                    <div class="option-card" data-value="light">Light</div>
+                    <div class="option-card" data-value="dark">Dark</div>
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>Animations</h3>
+                <div class="settings-grid" id="animSettings">
+                    <div class="option-card" data-value="enabled">Enabled</div>
+                    <div class="option-card" data-value="reduced">Reduced</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>

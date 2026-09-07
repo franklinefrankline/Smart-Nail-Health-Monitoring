@@ -1,0 +1,56 @@
+/* Mobile-first constraints */
+
+/* Tablet & Mobile */
+@media (max-width: 912px) {
+  .nav-links {
+    position: fixed;
+    top: 60px; /* Adjust based on navbar height */
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: var(--surface);
+    backdrop-filter: var(--glass-backdrop);
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+    transition: left 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav-links.nav-active {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .btn {
+    width: 100%;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  
+  .main-content {
+    padding: 1rem 5%;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
+/* Assure no horizontal scroll */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}

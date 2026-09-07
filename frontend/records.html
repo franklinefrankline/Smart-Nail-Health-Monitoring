@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Reports - Smart Nail Health</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/records.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand"><a href="dashboard.html"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a></div>
+        <button class="hamburger" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="upload.html" class="btn btn-primary">Upload</a>
+            <a href="records.html" class="active">My Reports</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#" onclick="logout(); return false;">Logout</a>
+        </div>
+    </nav>
+    <main class="main-content records-page">
+        <header class="page-heading"><div><p class="eyebrow">Your records</p><h1>My Reports</h1><p>Review every completed nail health analysis in one place.</p></div><a class="btn btn-primary" href="upload.html"><i class="fa-solid fa-plus"></i> New analysis</a></header>
+        <section class="card records-card" aria-labelledby="reportsHeading">
+            <div class="records-toolbar"><h2 id="reportsHeading">Analysis history</h2><span id="reportCount" class="record-count">Loading...</span></div>
+            <div id="recordsList" class="records-list"><div class="empty-state">Loading reports...</div></div>
+        </section>
+        <p class="records-disclaimer">Image-based monitoring supports awareness and does not replace professional medical advice.</p>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/records.js"></script>
+</body>
+</html>

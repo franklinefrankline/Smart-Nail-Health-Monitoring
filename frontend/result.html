@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Result - Smart Nail Health Monitoring System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/result.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="index.html" style="color: inherit;"><i class="fa-solid fa-heart-pulse"></i> NailHealth</a>
+        </div>
+        <button class="hamburger"><i class="fa-solid fa-bars"></i></button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="upload.html" class="btn btn-primary">Upload</a>
+            <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div id="loadingState" style="text-align: center; padding: 4rem;">
+            <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
+            <h3 class="mt-2">Loading result...</h3>
+        </div>
+
+        <div id="resultContent" style="display: none;">
+            <div class="result-header">
+                <h2>Analysis Result</h2>
+                <p style="color: var(--text-secondary);" id="reportDate"></p>
+            </div>
+
+            <div class="card">
+                <div style="text-align: center;">
+                    <div class="score-display" id="scoreCircle">
+                        <span class="big" id="healthScore">--</span>
+                        <span class="small">/100</span>
+                    </div>
+                    <div class="risk-badge" id="riskBadge">--</div>
+                </div>
+
+                <div class="result-grid">
+                    <div class="image-section">
+                        <img id="analyzedImage" src="" alt="Analyzed Nail Image">
+                        <div class="mt-2" style="display: flex; gap: 1rem; justify-content: center;">
+                            <a href="dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+                            <button id="downloadPdfBtn" class="btn btn-primary"><i class="fa-solid fa-download"></i> Save PDF</button>
+                        </div>
+                    </div>
+                    
+                    <div class="details-section">
+                        <h3>Detailed Metrics</h3>
+                        <div class="metric-row">
+                            <span class="metric-label">Moisture Indicator</span>
+                            <span class="metric-value" id="moistureVal">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Brightness</span>
+                            <span class="metric-value" id="brightnessVal">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Contrast</span>
+                            <span class="metric-value" id="contrastVal">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Color Variation</span>
+                            <span class="metric-value" id="colorVarVal">--</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-label">Texture Score</span>
+                            <span class="metric-value" id="textureVal">--</span>
+                        </div>
+
+                        <div class="recommendations-box">
+                            <h4 style="margin-bottom: 0.5rem; color: var(--primary);"><i class="fa-solid fa-clipboard-list"></i> Recommendations</h4>
+                            <p id="recommendationsText" style="line-height: 1.6;"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/result.js"></script>
+</body>
+</html>
