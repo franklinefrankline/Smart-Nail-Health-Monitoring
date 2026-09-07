@@ -18,6 +18,8 @@ UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 def get_env_value(key, default=""):
+    if key in os.environ and os.environ[key]:
+        return os.environ[key]
     env_path = os.path.join(os.path.dirname(__file__), ".env")
     if not os.path.exists(env_path):
         return default
@@ -437,7 +439,42 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
             pass
         super().server_bind()
 
+def init_db():
+    schema = """
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'user',
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS analysis_reports (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        image_path VARCHAR(255) NOT NULL,
+        health_score INTEGER CHECK (health_score >= 0 AND health_score <= 100),
+        risk_level VARCHAR(50) NOT NULL,
+        brightness FLOAT,
+        contrast FLOAT,
+        color_variation FLOAT,
+        edge_density FLOAT,
+        texture_score FLOAT,
+        moisture_indicator VARCHAR(50),
+        recommendation TEXT,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
+    """
+    try:
+        db_client.execute_query(schema, fetch=False)
+        print("Database schema verified / initialized successfully.")
+    except Exception as e:
+        print(f"Warning: Database auto-init skipped or failed: {e}")
+
 if __name__ == "__main__":
+    init_db()
     try:
         httpd = ThreadedTCPServer(("::", PORT), CORSRequestHandler)
     except Exception:
@@ -446,3 +483,4 @@ if __name__ == "__main__":
         
     print(f"Serving at port {PORT} with Standard Library only")
     httpd.serve_forever()
+

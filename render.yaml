@@ -16,4 +16,4 @@ services:
 databases:
   - name: smart-nail-db
     databaseName: smart_nail_db
-    user: postgres
+    user: smart_nail_user
