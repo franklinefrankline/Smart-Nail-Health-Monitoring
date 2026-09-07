@@ -14,3 +14,4 @@ test-results/
 !.gitkeep
 !**/uploads/.gitkeep
 !**/reports/.gitkeep
+smart_nail_backup.sql
