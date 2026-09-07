@@ -3,7 +3,8 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://YOUR_RENDER_BACKEND_URL/api/$1"
+      "destination": "https://smart-nail-health-monitoring.onrender.com/api/$1"
     }
   ]
 }
+
