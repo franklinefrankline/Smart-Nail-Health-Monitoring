@@ -80,6 +80,24 @@ python -m http.server 5500
 ```
 Open `http://127.0.0.1:5500` in your browser.
 
+## ☁️ Deployment
+
+### Backend (Render)
+The backend is configured for easy deployment on [Render](https://render.com/).
+1. Push your repository to GitHub.
+2. In the Render Dashboard, create a **New Blueprint Instance**.
+3. Connect your GitHub repository.
+4. Render will automatically detect the `render.yaml` file and provision the Web Service and PostgreSQL database.
+5. Once deployed, note your backend URL (e.g., `https://smart-nail-backend.onrender.com`).
+
+### Frontend (Vercel)
+The frontend is configured to be hosted on [Vercel](https://vercel.com/) with automatic API rewrites.
+1. Update `frontend/vercel.json` and replace `YOUR_RENDER_BACKEND_URL` with your actual Render backend URL.
+2. In the Vercel Dashboard, create a **New Project**.
+3. Connect your GitHub repository.
+4. Set the **Root Directory** to `frontend`.
+5. Click **Deploy**. Your frontend will now securely communicate with your Render backend.
+
 ## 🧪 Testing
 To run the Playwright E2E tests:
 ```bash
