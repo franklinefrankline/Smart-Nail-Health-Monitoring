@@ -2,19 +2,6 @@ import subprocess
 import json
 import os
 import shutil
-from urllib.parse import urlparse, unquote
-
-def parse_database_url(url: str):
-    """Parses postgresql://user:pass@host:port/dbname or postgres://..."""
-    if url.startswith("postgres://"):
-        url = "postgresql://" + url[len("postgres://"):]
-    parsed = urlparse(url)
-    user = parsed.username or "postgres"
-    password = unquote(parsed.password or "")
-    host = parsed.hostname or "localhost"
-    port = str(parsed.port or 5432)
-    dbname = parsed.path.lstrip("/") or "smart_nail_db"
-    return user, password, host, port, dbname
 
 _DB_CONFIG = None
 
@@ -40,12 +27,6 @@ def get_db_env():
     if not url:
         raise Exception("DATABASE_URL not found in environment or .env")
         
-    user, password, host, port, dbname = parse_database_url(url)
-    
-    # Create environment for subprocess
-    proc_env = os.environ.copy()
-    proc_env["PGPASSWORD"] = password
-    
     # Locate psql executable
     psql_bin = shutil.which("psql")
     if not psql_bin:
@@ -57,11 +38,8 @@ def get_db_env():
     
     _DB_CONFIG = {
         "psql_bin": psql_bin,
-        "user": user,
-        "host": host,
-        "port": port,
-        "dbname": dbname,
-        "env": proc_env
+        "url": url,
+        "env": os.environ.copy()
     }
     return _DB_CONFIG
 
@@ -82,10 +60,7 @@ def execute_query(query: str, fetch=True):
     cmd = [
         db_config.get("psql_bin", "psql"),
         "-X",
-        "-U", db_config["user"],
-        "-h", db_config["host"],
-        "-p", db_config["port"],
-        "-d", db_config["dbname"],
+        "-d", db_config["url"],
         "-t", # tuples only (no headers)
         "-A", # unaligned output
         "-c", wrapped_query
@@ -108,4 +83,5 @@ def execute_query(query: str, fetch=True):
     except subprocess.CalledProcessError as e:
         print(f"Database error: {e.stderr}")
         raise Exception(f"Database query failed: {e.stderr}")
+
 
